@@ -1,0 +1,5 @@
+export * from '@/shared/components'
+export * from '@/shared/hooks'
+export * from '@/shared/services'
+export * from '@/shared/ui'
+export * from '@/shared/utils'
