@@ -1,73 +1,147 @@
-# React + TypeScript + Vite
+# Artha Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Production-oriented frontend workspace for Artha, a financial operating system for Indian SMB merchants.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19 + TypeScript (strict)
+- Vite 7
+- React Router
+- TanStack Query
+- Zustand
+- Axios
+- Tailwind CSS v3 + PostCSS
+- ESLint + Prettier + EditorConfig
 
-## React Compiler
+## Quick Start
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd artha-frontend
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+If PowerShell blocks `npm.ps1`, use:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```powershell
+npm.cmd run dev
 ```
+
+App runs at `http://localhost:5173` by default.
+
+## Scripts
+
+- `npm run dev` - start Vite dev server
+- `npm run build` - type-check project references and build for production
+- `npm run preview` - preview production build
+- `npm run typecheck` - strict TypeScript check (`tsconfig.app.json`)
+- `npm run lint` - ESLint with `--max-warnings 0`
+- `npm run format` - Prettier write
+- `npm run format:check` - Prettier check
+
+## Environment
+
+`.env`:
+
+```env
+VITE_API_BASE_URL=http://localhost:8000
+VITE_ENV=development
+```
+
+Typed in `src/vite-env.d.ts`, consumed through `src/core/config/env.ts`.
+
+## Routing
+
+Defined in `src/app/router.tsx`:
+
+- `/` -> `MarketingLayout` + `LandingPage`
+- `/login` -> `LoginPage` (standalone auth layout)
+- `/signup` -> `SignupPage` (standalone auth layout)
+- `/dashboard` -> `AppLayout` + `DashboardPage` scaffold
+
+## Architecture
+
+```text
+src/
+|-- app/                    # app shell, providers, router
+|-- core/                   # env, feature flags, state, auth/rbac placeholders
+|-- layouts/                # MarketingLayout + AppLayout
+|-- modules/                # feature modules (auth, dashboard)
+|-- public-pages/           # marketing/public pages
+|-- shared/                 # hooks, services, ui/components placeholders
+|-- styles/                 # global Tailwind entry
+`-- main.tsx                # bootstrap
+```
+
+### Key Contracts
+
+- Absolute imports: `@/*` -> `src/*`
+- React Query provider: `src/app/providers.tsx`
+- Feature flags:
+  - provider scaffold: `src/core/feature-flags/FeatureProvider.tsx`
+  - hook: `src/core/feature-flags/useFeature.ts`
+- Global app store (Zustand): `src/core/state/app.store.ts`
+  - `user`
+  - `role`
+  - `enabledFeatures`
+- API client (single Axios instance): `src/shared/services/api.ts`
+  - base URL from `env.apiBaseUrl`
+  - request/response interceptor stubs
+  - shared error normalization in `src/shared/services/normalize-error.ts`
+- Reveal motion hook (IntersectionObserver + reduced motion support):
+  - `src/shared/hooks/useRevealOnScroll.ts`
+
+## UI Surfaces
+
+### Marketing Layout
+
+- Header with brand and auth actions (`Login`, `Sign Up`)
+- Renders nested marketing routes through `<Outlet />`
+
+### Landing Page (`/`)
+
+Composed in `src/public-pages/landing/LandingPage.tsx` with section components:
+
+1. Hero
+2. Trust strip
+3. Core pillars (interactive flip cards)
+4. Data-driven section
+5. Security and compliance
+6. Implementation and onboarding
+7. Final CTA
+8. Modular pricing preview (interactive billing tabs)
+9. Footer
+
+### Auth Pages
+
+- `src/modules/auth/LoginPage.tsx`
+- `src/modules/auth/SignupPage.tsx`
+
+Current status:
+
+- UI-only forms
+- client-side state only
+- no backend/auth integration yet
+- accessibility baseline included (`label/htmlFor`, `required`, `aria-describedby`, `aria-live`)
+
+## Styling and Motion
+
+- Tailwind utility classes only
+- Global style entry: `src/styles/index.css`
+- Design tone: industrial, enterprise-grade slate palette
+- Motion system is subtle and performance-safe:
+  - CSS transitions only
+  - IntersectionObserver-based reveal
+  - reduced-motion respected
+
+## Code Quality Setup
+
+- Strict TypeScript (`strict: true`, no unused locals/params)
+- ESLint with React Hooks + TypeScript rules + Prettier conflict disabling
+- Prettier config in `.prettierrc`
+- Editor formatting baseline in `.editorconfig`
+
+## Notes
+
+- `public/` is currently empty.
+- Several folders intentionally contain placeholder barrels (`export {}`) for future growth.

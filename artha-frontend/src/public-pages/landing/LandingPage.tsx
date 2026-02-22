@@ -17,10 +17,10 @@ export function LandingPage() {
       <TrustStrip />
       <CorePillarsSection />
       <DataDrivenSection />
-      <ModularPricingPreview />
-      <FinalCTASection />
       <SecurityComplianceSection />
       <ImplementationSection />
+      <FinalCTASection />
+      <ModularPricingPreview />
       <FooterSection />
     </>
   )
