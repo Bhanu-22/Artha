@@ -15,12 +15,12 @@ export function LandingPage() {
     <>
       <HeroSection />
       <TrustStrip />
-      <CorePillarsSection />
       <DataDrivenSection />
+      <CorePillarsSection />
       <SecurityComplianceSection />
       <ImplementationSection />
-      <FinalCTASection />
       <ModularPricingPreview />
+      <FinalCTASection />
       <FooterSection />
     </>
   )

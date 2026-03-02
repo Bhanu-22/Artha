@@ -1,23 +1,21 @@
-const LOGO_PLACEHOLDERS = ['NEXA MART', 'RIVET FOODS', 'UNITY STORES', 'METRO TRADE', 'SOUTH POINT']
+const INTEGRATIONS = ['Stripe', 'Plaid', 'Visa', 'QuickBooks']
 
 export function TrustStrip() {
   return (
-    <section aria-label="Trust indicators" className="border-y border-slate-200 bg-slate-50">
-      <div className="mx-auto max-w-7xl px-6 py-20 lg:py-28">
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-          <p className="text-sm font-medium uppercase tracking-wider text-slate-500">
-            Trusted by 10,000+ merchants
-          </p>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:flex">
-            {LOGO_PLACEHOLDERS.map((brand) => (
-              <span
-                key={brand}
-                className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-center text-sm font-semibold uppercase tracking-wide text-slate-400"
-              >
-                {brand}
-              </span>
-            ))}
-          </div>
+    <section className="border-t border-slate-200 py-20 bg-white">
+      <div className="mx-auto max-w-7xl px-6">
+        <p className="mb-10 text-center text-sm font-medium uppercase tracking-widest text-slate-500">
+          Integrated with Enterprise Standards
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 opacity-60">
+          {INTEGRATIONS.map((name) => (
+            <span 
+              key={name} 
+              className="text-xl font-semibold tracking-tight text-slate-900 md:text-2xl"
+            >
+              {name}
+            </span>
+          ))}
         </div>
       </div>
     </section>

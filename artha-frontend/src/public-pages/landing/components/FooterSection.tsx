@@ -4,16 +4,16 @@ type FooterLinkGroup = {
   links: string[]
 }
 
-const footerLinks: Record<'product' | 'company' | 'legal', FooterLinkGroup> = {
+const FOOTER_DATA: Record<'product' | 'company' | 'legal', FooterLinkGroup> = {
   product: {
     title: 'Product',
     headingId: 'footer-product-heading',
-    links: ['POS Engine', 'Inventory Intelligence', 'Digital Khata', 'AI Copilot', 'Pricing'],
+    links: ['POS Engine', 'Inventory Intelligence', 'Digital Khata', 'AI Insights', 'Pricing'],
   },
   company: {
     title: 'Company',
     headingId: 'footer-company-heading',
-    links: ['About', 'Security', 'Careers', 'Contact'],
+    links: ['About Artha', 'Security & Trust', 'Implementation', 'Contact'],
   },
   legal: {
     title: 'Legal',
@@ -22,36 +22,36 @@ const footerLinks: Record<'product' | 'company' | 'legal', FooterLinkGroup> = {
   },
 }
 
-const FOOTER_COLUMNS: Array<keyof typeof footerLinks> = ['product', 'company', 'legal']
-
 export function FooterSection() {
   return (
-    <footer aria-label="Artha site footer" className="bg-slate-900 text-slate-300">
-      <div className="mx-auto max-w-7xl px-6 py-20">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
-          <div>
-            <h3 className="text-lg font-medium text-white">Artha</h3>
-            <p className="mt-4 text-sm text-slate-400">
-              India&apos;s financial operating system for growing businesses.
+    <footer className="border-t border-slate-200 bg-background-light">
+      <div className="mx-auto max-w-7xl px-6 py-24">
+        <div className="grid grid-cols-2 gap-12 md:grid-cols-4 lg:gap-8">
+          {/* Brand Column */}
+          <div className="col-span-2 md:col-span-1">
+            <span className="text-xl font-bold tracking-tight text-slate-900">Artha</span>
+            <p className="mt-4 text-sm leading-relaxed text-slate-500 max-w-xs">
+              The unified financial operating system for the modern Indian enterprise. 
+              Built for scale, security, and operational excellence.
             </p>
           </div>
 
-          {FOOTER_COLUMNS.map((columnKey) => {
-            const column = footerLinks[columnKey]
-
+          {/* Link Columns */}
+          {(Object.keys(FOOTER_DATA) as Array<keyof typeof FOOTER_DATA>).map((key) => {
+            const group = FOOTER_DATA[key]
             return (
-              <div key={columnKey}>
-                <h3 id={column.headingId} className="text-base font-medium text-white">
-                  {column.title}
+              <div key={key}>
+                <h3 id={group.headingId} className="text-sm font-semibold uppercase tracking-wider text-slate-900">
+                  {group.title}
                 </h3>
-                <nav aria-labelledby={column.headingId}>
-                  <ul role="list" className="mt-4 space-y-3">
-                    {column.links.map((link) => (
+                <nav aria-labelledby={group.headingId} className="mt-6">
+                  <ul className="space-y-4">
+                    {group.links.map((link) => (
                       <li key={link}>
                         <a
-                          href="/"
-                          onClick={(event) => event.preventDefault()}
-                          className="text-slate-400 transition-colors hover:text-white"
+                          href="#"
+                          className="text-sm text-slate-600 transition-colors hover:text-primary"
+                          onClick={(e) => e.preventDefault()}
                         >
                           {link}
                         </a>
@@ -64,8 +64,15 @@ export function FooterSection() {
           })}
         </div>
 
-        <div className="mt-12 border-t border-slate-800 pt-6 text-sm text-slate-500">
-          <p>&copy; 2026 Artha Technologies Pvt. Ltd. All rights reserved.</p>
+        {/* Bottom Strip */}
+        <div className="mt-20 border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-slate-500">
+            &copy; 2026 Artha Technologies Pvt. Ltd. All rights reserved.
+          </p>
+          <div className="flex gap-6">
+            <span className="text-xs text-slate-400">ISO 27001 Certified</span>
+            <span className="text-xs text-slate-400">GST-Ready</span>
+          </div>
         </div>
       </div>
     </footer>

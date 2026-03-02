@@ -1,105 +1,122 @@
-import { useRevealOnScroll } from '@/shared/hooks'
-
 export function HeroSection() {
-  const { ref: heroTextRef, isVisible: heroTextVisible, prefersReducedMotion } =
-    useRevealOnScroll<HTMLDivElement>()
-
-  const heroRevealClass =
-    prefersReducedMotion || heroTextVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-
   return (
-    <section aria-labelledby="hero-heading" className="border-b border-slate-200 bg-slate-50">
-      <div className="mx-auto max-w-7xl px-6 py-20 lg:py-28">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div
-            ref={heroTextRef}
-            className={`max-w-2xl space-y-6 transition-opacity transition-transform duration-400 ease-out ${heroRevealClass}`}
-          >
-            <div className="space-y-6">
-              <p className="text-sm font-medium uppercase tracking-wider text-slate-500">
-                Financial Infrastructure For Indian SMBs
-              </p>
-              <h1
-                id="hero-heading"
-                className="text-5xl font-semibold leading-tight tracking-tight text-slate-900 lg:text-7xl"
-              >
-                India&apos;s Financial Operating System for Growing Businesses.
-              </h1>
-              <p className="text-base leading-relaxed text-slate-500 lg:text-lg">
-                Unify your POS, Inventory, Khata, and AI Insights in one connected system built
-                for daily merchant operations and long-term financial control.
-              </p>
-            </div>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <button
-                type="button"
-                className="rounded-lg bg-slate-900 px-6 py-3 text-sm font-medium text-white shadow-sm transition-colors transition-transform transition-shadow duration-200 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-md"
-              >
-                Start Free
-              </button>
-              <button
-                type="button"
-                className="rounded-lg border border-slate-300 bg-white px-6 py-3 text-sm font-medium text-slate-700 shadow-sm transition-colors duration-200 hover:bg-slate-100"
-              >
-                Book a Demo
-              </button>
-            </div>
-          </div>
+    <section className="bg-white py-24">
+      <div className="mx-auto max-w-7xl px-6 text-center">
+        {/* Eyebrow Badge */}
+        <div className="mb-8 flex justify-center">
+          <span className="rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-primary">
+            AI-Powered Financial OS
+          </span>
+        </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-lg">
-            <div className="space-y-5">
-              <div className="grid grid-cols-3 gap-3 border-b border-slate-200 pb-4">
-                <article className="rounded-xl border border-slate-200 bg-slate-50 p-3 shadow-sm">
-                  <p className="text-xs text-slate-500">Today&apos;s Sales</p>
-                  <p className="mt-2 text-lg font-semibold text-slate-900">INR 1.42L</p>
-                </article>
-                <article className="rounded-xl border border-slate-200 bg-slate-50 p-3 shadow-sm">
-                  <p className="text-xs text-slate-500">Inventory</p>
-                  <p className="mt-2 text-lg font-semibold text-slate-900">2,438 SKUs</p>
-                </article>
-                <article className="rounded-xl border border-slate-200 bg-slate-50 p-3 shadow-sm">
-                  <p className="text-xs text-slate-500">Pending Khata</p>
-                  <p className="mt-2 text-lg font-semibold text-slate-900">INR 47K</p>
-                </article>
+        {/* Headline */}
+        <h1 className="mx-auto max-w-4xl text-4xl font-semibold tracking-tight text-slate-900 lg:text-6xl">
+          India&apos;s <span className="text-primary">Financial Operating System</span>
+        </h1>
+
+        {/* Subtext */}
+        <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-slate-600">
+          Streamline your enterprise operations with a unified platform for real-time treasury management, 
+          automated compliance, and deep financial insights. Built for the scale and complexity of 
+          the modern Indian economy.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+          <button
+            type="button"
+            className="rounded-lg bg-primary px-8 py-3.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary-light"
+          >
+            Get Started
+          </button>
+          <button
+            type="button"
+            className="rounded-lg border border-slate-200 bg-white px-8 py-3.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+          >
+            Book a Demo
+          </button>
+        </div>
+
+        {/* Dashboard Mock Container */}
+        <div className="mt-20">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/50 text-left">
+            {/* Top Bar */}
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+              <div>
+                <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+                  Financial Control Center
+                </p>
+                <h3 className="mt-1 text-lg font-semibold text-slate-900">
+                  Live Operations Overview
+                </h3>
               </div>
 
-              <article className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-                <header className="mb-3 flex items-center justify-between">
-                  <h2 className="text-sm font-semibold text-slate-900">Daily Collections</h2>
-                  <span className="text-xs font-medium text-slate-500">Last 7 days</span>
-                </header>
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between rounded-xl bg-slate-50 px-3 py-2">
-                    <span className="text-xs text-slate-500">UPI</span>
-                    <span className="text-xs font-semibold text-slate-800">INR 58,320</span>
-                  </div>
-                  <div className="flex items-center justify-between rounded-xl bg-slate-50 px-3 py-2">
-                    <span className="text-xs text-slate-500">Card</span>
-                    <span className="text-xs font-semibold text-slate-800">INR 41,080</span>
-                  </div>
-                  <div className="flex items-center justify-between rounded-xl bg-slate-50 px-3 py-2">
-                    <span className="text-xs text-slate-500">Cash</span>
-                    <span className="text-xs font-semibold text-slate-800">INR 23,940</span>
-                  </div>
-                </div>
-              </article>
+              <span className="rounded-md bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-700">
+                All systems operational
+              </span>
+            </div>
 
-              <article className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-                <h2 className="text-sm font-semibold text-slate-900">Revenue Pattern</h2>
-                <div className="mt-3 space-y-2">
-                  <div className="grid grid-cols-5 gap-2 border-t border-slate-200 pt-2">
-                    <span className="h-12 rounded bg-slate-200" />
-                    <span className="h-16 rounded bg-slate-300" />
-                    <span className="h-10 rounded bg-slate-200" />
-                    <span className="h-14 rounded bg-slate-300" />
-                    <span className="h-20 rounded bg-slate-900" />
-                  </div>
-                  <p className="text-xs text-slate-500">
-                    Peak throughput this week was driven by repeat customers and strong UPI
-                    conversion.
+            {/* KPI Grid */}
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <p className="text-xs text-slate-500">Revenue Today</p>
+                <p className="mt-1 text-2xl font-semibold text-slate-900">
+                  ₹3.24L
+                </p>
+                <p className="mt-1 text-xs text-emerald-600">
+                  +8.2% vs yesterday
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <p className="text-xs text-slate-500">Outstanding Khata</p>
+                <p className="mt-1 text-2xl font-semibold text-slate-900">
+                  ₹82K
+                </p>
+                <p className="mt-1 text-xs text-amber-600">
+                  2 collections pending
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <p className="text-xs text-slate-500">Inventory Health</p>
+                <p className="mt-1 text-2xl font-semibold text-slate-900">
+                  94%
+                </p>
+                <p className="mt-1 text-xs text-slate-500">
+                  Stable across outlets
+                </p>
+              </div>
+            </div>
+
+            {/* Activity Feed */}
+            <div className="mt-8">
+              <p className="text-sm font-medium text-slate-700">
+                Recent Operational Events
+              </p>
+
+              <div className="mt-3 space-y-3">
+                <div className="flex items-center justify-between rounded-lg border border-slate-100 bg-white px-4 py-3">
+                  <p className="text-sm text-slate-800">
+                    UPI reconciliation completed
                   </p>
+                  <span className="text-xs text-slate-500">2m ago</span>
                 </div>
-              </article>
+
+                <div className="flex items-center justify-between rounded-lg border border-slate-100 bg-white px-4 py-3">
+                  <p className="text-sm text-slate-800">
+                    Khata reminder sent to 3 customers
+                  </p>
+                  <span className="text-xs text-slate-500">10m ago</span>
+                </div>
+
+                <div className="flex items-center justify-between rounded-lg border border-slate-100 bg-white px-4 py-3">
+                  <p className="text-sm text-slate-800">
+                    Inventory alert: SKU 147 low stock
+                  </p>
+                  <span className="text-xs text-slate-500">Live</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

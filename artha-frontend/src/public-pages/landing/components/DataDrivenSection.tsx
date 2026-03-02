@@ -1,89 +1,90 @@
-import { useRevealOnScroll } from '@/shared/hooks'
-
-const CHART_BARS = [
-  { label: 'Mon', height: 'h-20', tone: 'bg-slate-300' },
-  { label: 'Tue', height: 'h-24', tone: 'bg-slate-300' },
-  { label: 'Wed', height: 'h-16', tone: 'bg-slate-300' },
-  { label: 'Thu', height: 'h-28', tone: 'bg-slate-300' },
-  { label: 'Fri', height: 'h-32', tone: 'bg-slate-900' },
-  { label: 'Sat', height: 'h-36', tone: 'bg-slate-300' },
-  { label: 'Sun', height: 'h-24', tone: 'bg-slate-300' },
-]
-
-const BAR_DELAYS = [
-  'delay-0',
-  'delay-[50ms]',
-  'delay-[100ms]',
-  'delay-[150ms]',
-  'delay-[200ms]',
-  'delay-[250ms]',
-  'delay-[300ms]',
-] as const
-
 export function DataDrivenSection() {
-  const { ref: dataSectionRef, isVisible: dataSectionVisible, prefersReducedMotion } =
-    useRevealOnScroll<HTMLDivElement>()
-
-  const dataSectionRevealClass =
-    prefersReducedMotion || dataSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-
-  const barsVisible = prefersReducedMotion || dataSectionVisible
-
   return (
-    <section aria-labelledby="data-driven-heading" className="border-b border-slate-200 bg-slate-50">
-      <div
-        ref={dataSectionRef}
-        className={`mx-auto grid max-w-7xl gap-10 px-6 py-20 transition-opacity transition-transform duration-500 ease-out lg:grid-cols-2 lg:items-center lg:py-28 ${dataSectionRevealClass}`}
-      >
-        <div className="max-w-2xl space-y-5">
-          <p className="text-sm font-medium uppercase tracking-wider text-slate-500">
-            Data Driven Operations
-          </p>
-          <h2
-            id="data-driven-heading"
-            className="text-3xl font-semibold tracking-tight text-slate-900 lg:text-4xl"
-          >
-            Your daily transactions become structured financial intelligence.
-          </h2>
-          <p className="text-base leading-relaxed text-slate-600 lg:text-lg">
-            Every bill, return, and collection maps into a clean ledger model so your team can act
-            on factual trends instead of fragmented reports.
-          </p>
-        </div>
-
-        <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-          <header className="mb-4 flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-slate-900">Weekly Collections</h3>
-            <span className="text-xs text-slate-500">Store Cluster A</span>
-          </header>
-
-          <div className="space-y-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-            <div className="border-t border-slate-200" />
-            <div className="border-t border-slate-200" />
-            <div className="border-t border-slate-200" />
-            <div className="grid h-44 grid-cols-7 items-end gap-2">
-              {CHART_BARS.map((bar, index) => (
-                <div key={bar.label} className="flex flex-col items-center gap-2">
-                  <div
-                    className={`w-full rounded ${bar.height} ${bar.tone} ${barsVisible ? 'opacity-100 translate-y-0 transition-opacity transition-transform duration-400 ease-out' : 'opacity-70 translate-y-2'} ${barsVisible && !prefersReducedMotion ? BAR_DELAYS[index] ?? 'delay-0' : ''}`}
-                  />
-                  <span className="text-xs font-medium text-slate-500">{bar.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-4 flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
+    <section className="bg-background-light py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
+          
+          {/* Left Column: Chat-style AI explanation */}
+          <div className="space-y-8">
             <div>
-              <p className="text-xs text-slate-500">Peak Day</p>
-              <p className="text-sm font-semibold text-slate-900">Saturday</p>
+              <h2 className="text-3xl font-semibold tracking-tight text-slate-900 lg:text-4xl">
+                Advanced AI Analysis
+              </h2>
+              <p className="mt-4 text-lg text-slate-600">
+                Move beyond static reporting. Our AI engine continuously monitors your financial data to identify 
+                anomalies, predict cash flow trends, and provide actionable operational insights.
+              </p>
             </div>
-            <div className="text-right">
-              <p className="text-xs text-slate-500">Average Ticket</p>
-              <p className="text-sm font-semibold text-slate-900">INR 1,384</p>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="space-y-4">
+                {/* User Question */}
+                <div className="flex items-start gap-3">
+                  <div className="h-8 w-8 shrink-0 rounded-full bg-slate-100" />
+                  <div className="rounded-2xl bg-slate-50 px-4 py-2 text-sm text-slate-700">
+                    "Why did my operational costs increase in Bangalore last week?"
+                  </div>
+                </div>
+
+                {/* AI Response */}
+                <div className="flex items-start gap-3">
+                  <div className="h-8 w-8 shrink-0 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs font-bold">
+                    A
+                  </div>
+                  <div className="space-y-2">
+                    <div className="rounded-2xl border border-slate-100 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm">
+                      <p className="font-semibold text-primary mb-1">Analysis Complete</p>
+                      <p>The 12% increase was driven by a surge in logistics surcharges and a 4-day delay 
+                      in vendor reconciliation for your Whitefield warehouse.</p>
+                    </div>
+                    <p className="text-[10px] text-slate-400 px-2">Powered by Artha Intelligence</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </article>
+
+          {/* Right Column: Chart mockup container */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+            <div className="mb-6 flex items-center justify-between">
+              <h3 className="text-sm font-semibold text-slate-900">Regional Performance Trend</h3>
+              <div className="flex gap-2">
+                <div className="h-2 w-2 rounded-full bg-primary" />
+                <div className="h-2 w-2 rounded-full bg-slate-200" />
+              </div>
+            </div>
+
+            <div className="relative flex h-64 items-end justify-between gap-2 border-b border-slate-100 pb-2">
+              {/* Fake Bars */}
+              <div className="w-full rounded-t bg-slate-100 h-[60%]" />
+              <div className="w-full rounded-t bg-slate-100 h-[75%]" />
+              <div className="w-full rounded-t bg-slate-100 h-[90%]" />
+              
+              {/* The Red Dip Bar */}
+              <div className="relative w-full rounded-t bg-red-400 h-[35%]">
+                <div className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-slate-900 px-2 py-1 text-[10px] font-medium text-white">
+                  Logistics Delay
+                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900" />
+                </div>
+              </div>
+
+              <div className="w-full rounded-t bg-slate-100 h-[80%]" />
+              <div className="w-full rounded-t bg-primary h-[95%]" />
+              <div className="w-full rounded-t bg-slate-100 h-[70%]" />
+            </div>
+
+            <div className="mt-4 flex justify-between text-[10px] font-medium text-slate-400 uppercase tracking-wider">
+              <span>Mon</span>
+              <span>Tue</span>
+              <span>Wed</span>
+              <span>Thu</span>
+              <span>Fri</span>
+              <span>Sat</span>
+              <span>Sun</span>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   )

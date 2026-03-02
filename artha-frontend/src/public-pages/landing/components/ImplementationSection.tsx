@@ -23,9 +23,9 @@ const IMPLEMENTATION_STEPS: ImplementationStep[] = [
 
 export function ImplementationSection() {
   return (
-    <section aria-labelledby="implementation-heading" className="bg-white">
-      <div className="mx-auto max-w-7xl px-6 py-24">
-        <div>
+    <section aria-labelledby="implementation-heading" className="bg-white py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="text-center md:text-left">
           <h2
             id="implementation-heading"
             className="text-3xl font-medium tracking-tight text-slate-900 lg:text-4xl"
@@ -40,12 +40,14 @@ export function ImplementationSection() {
 
         <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-3">
           {IMPLEMENTATION_STEPS.map((step, index) => (
-            <article key={step.title} className="rounded-2xl border border-slate-200 p-8 shadow-sm">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-900 text-sm font-medium text-white">
+            <article key={step.title} className="rounded-2xl border border-slate-200 p-8 shadow-sm bg-white">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white text-sm font-bold">
                 {index + 1}
               </div>
-              <h3 className="mt-5 text-xl font-semibold text-slate-900">{step.title}</h3>
-              <p className="mt-4 text-base leading-relaxed text-slate-600">{step.description}</p>
+              <h3 className="mt-6 text-xl font-semibold text-slate-900">{step.title}</h3>
+              <p className="mt-4 text-base leading-relaxed text-slate-600">
+                {step.description}
+              </p>
             </article>
           ))}
         </div>
