@@ -2,12 +2,12 @@ const INTEGRATIONS = ['Stripe', 'Plaid', 'Visa', 'QuickBooks']
 
 export function TrustStrip() {
   return (
-    <section className="border-t border-slate-200 py-20 bg-white">
+    <section className="border-t border-slate-200 py-10 bg-white">
       <div className="mx-auto max-w-7xl px-6">
-        <p className="mb-10 text-center text-sm font-medium uppercase tracking-widest text-slate-500">
+        <p className="mb-6 text-center text-sm font-medium uppercase tracking-widest text-slate-500">
           Integrated with Enterprise Standards
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 opacity-60">
+        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 opacity-60">
           {INTEGRATIONS.map((name) => (
             <span 
               key={name} 
